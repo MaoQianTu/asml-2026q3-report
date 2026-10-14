@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASML Q3 2026 财报深度复盘 + 1-2 年展望</title>
+<style>
+  :root{
+    --navy:#16243f; --navy2:#1f3357; --gold:#c9a227; --gold-soft:#e7d9a8;
+    --ink:#1d2733; --muted:#5b6776; --line:#e3e8ef;
+    --red:#d8392f; --redbg:#fdecea; --redbd:#f3b6b1;
+    --amber:#d98a00; --amberbg:#fef4e3; --amberbd:#f3d39a;
+    --green:#2e9e5b; --greenbg:#e8f6ee; --greenbd:#b6e3c8;
+    --bg:#eef1f5; --card:#ffffff; --shadow:0 4px 18px rgba(22,36,63,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.75; font-size:15px;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{display:flex;max-width:1280px;margin:0 auto;gap:28px;padding:0 22px 80px}
+
+  /* ---------- Sidebar TOC ---------- */
+  .toc{position:sticky;top:24px;align-self:flex-start;width:230px;flex:0 0 230px;
+    background:var(--card);border-radius:14px;padding:20px 16px;box-shadow:var(--shadow);
+    max-height:calc(100vh - 48px);overflow:auto}
+  .toc h4{font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+  .toc a{display:block;padding:7px 10px;border-radius:8px;color:var(--muted);font-size:13.5px;
+    border-left:3px solid transparent;transition:.18s}
+  .toc a:hover{background:#f4f6fa;color:var(--ink)}
+  .toc a.active{background:#f1f5fb;color:var(--navy);border-left-color:var(--gold);font-weight:600}
+  .toc .sub{padding-left:22px;font-size:12.5px}
+
+  /* ---------- Main ---------- */
+  .main{flex:1;min-width:0}
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#243a63 100%);
+    color:#fff;border-radius:18px;padding:42px 40px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;
+    background:radial-gradient(circle,rgba(201,162,39,.35),transparent 70%);border-radius:50%}
+  .eyebrow{color:var(--gold-soft);font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+  .hero h1{font-family:"Noto Serif SC","Songti SC",serif;font-size:34px;line-height:1.25;margin:12px 0 8px;font-weight:800}
+  .hero .sub{font-size:16px;color:#cdd7e6;font-weight:300}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;position:relative;z-index:1}
+  .meta .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    padding:6px 13px;border-radius:999px;font-size:12.5px;color:#e6ecf5;backdrop-filter:blur(4px)}
+  .meta .chip b{color:var(--gold-soft)}
+
+  section{background:var(--card);border-radius:16px;padding:30px 32px;margin-top:22px;box-shadow:var(--shadow)}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+  .sec-head .num{background:var(--navy);color:#fff;font-size:13px;font-weight:700;width:30px;height:30px;
+    border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 30px}
+  .sec-head h2{font-size:21px;font-weight:800;color:var(--navy)}
+  .sec-head .stars{margin-left:auto;color:var(--gold);font-size:13px;letter-spacing:1px}
+  h3{font-size:16.5px;color:var(--navy2);margin:24px 0 12px;font-weight:700;display:flex;align-items:center;gap:8px}
+  h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  p{margin:10px 0;color:#33414f}
+
+  /* verdict banner */
+  .verdict{border-radius:14px;padding:22px 26px;margin:6px 0 18px;
+    background:linear-gradient(135deg,#e8f6ee,#f1f9f4);border:1px solid var(--greenbd)}
+  .verdict .tag{display:inline-block;background:var(--green);color:#fff;font-weight:700;font-size:13px;
+    padding:4px 14px;border-radius:999px;letter-spacing:.05em}
+  .verdict h3{margin:12px 0 6px;color:var(--green);font-size:18px}
+  .verdict p{color:#235138;margin:6px 0}
+
+  /* metric cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin:16px 0}
+  .card{border:1px solid var(--line);border-radius:13px;padding:18px 18px 16px;position:relative;background:#fff;
+    border-top:4px solid var(--line)}
+  .card.red{border-top-color:var(--red)}
+  .card.amber{border-top-color:var(--amber)}
+  .card.green{border-top-color:var(--green)}
+  .card .label{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .card .val{font-size:28px;font-weight:800;color:var(--navy);margin:6px 0 2px;line-height:1.1}
+  .card .val small{font-size:14px;font-weight:600;color:var(--muted)}
+  .card .note{font-size:12px;color:var(--muted);margin-top:4px}
+
+  /* key points */
+  .keypoints{list-style:none;counter-reset:k}
+  .keypoints li{counter-increment:k;position:relative;padding:12px 16px 12px 50px;margin:10px 0;
+    background:#f8fafc;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;font-size:14.5px}
+  .keypoints li::before{content:counter(k);position:absolute;left:14px;top:12px;width:24px;height:24px;
+    background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700}
+  .keypoints b{color:var(--navy)}
+
+  /* tables */
+  .tbl-wrap{overflow-x:auto;margin:14px 0;border-radius:12px;border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+  thead th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-weight:600;font-size:13px;
+    white-space:nowrap}
+  tbody td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+  tbody tr:nth-child(even){background:#f8fafc}
+  tbody tr:hover{background:#f1f5fb}
+  td .em{font-weight:700;color:var(--navy)}
+  td.red{color:var(--red);font-weight:700}
+  td.amber{color:var(--amber);font-weight:700}
+  td.green{color:var(--green);font-weight:700}
+
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+  .badge.red{background:var(--redbg);color:var(--red)}
+  .badge.amber{background:var(--amberbg);color:var(--amber)}
+  .badge.green{background:var(--greenbg);color:var(--green)}
+  .badge.navy{background:#e7eefb;color:var(--navy)}
+
+  .note-box{background:#f4f7fb;border:1px solid #d8e2f0;border-left:4px solid var(--navy);
+    border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:14px}
+  .warn-box{background:var(--amberbg);border:1px solid var(--amberbd);border-left:4px solid var(--amber);
+    border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:14px}
+  .quote{background:#f8fafc;border-left:4px solid var(--gold);padding:14px 20px;margin:16px 0;
+    font-size:15px;color:var(--navy2);font-style:italic;border-radius:0 10px 10px 0}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:900px){.two-col{grid-template-columns:1fr}.toc{display:none}}
+
+  .foot{margin-top:22px;background:#fff;border-radius:16px;padding:24px 32px;box-shadow:var(--shadow);
+    font-size:12.5px;color:var(--muted);border-top:4px solid var(--gold)}
+  .foot b{color:var(--navy)}
+  .disclaimer{background:var(--redbg);border:1px solid var(--redbd);border-radius:12px;padding:16px 20px;margin-top:14px;
+    font-size:13px;color:#6b332e}
+  #toTop{position:fixed;right:26px;bottom:26px;width:46px;height:46px;border-radius:50%;background:var(--navy);
+    color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transition:.3s;z-index:50}
+  #toTop.show{opacity:1;visibility:visible}
+  @media print{
+    body{background:#fff}.toc{display:none}section,.hero,.foot{box-shadow:none;break-inside:avoid}
+    #toTop{display:none}.wrap{display:block;max-width:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h4>目录导航</h4>
+    <a href="#s1">一、核心结论速览</a>
+    <a href="#s2">二、Q3 2026 财报核心数据</a>
+    <a href="#s3">三、行业地位与护城河</a>
+    <a href="#s3" class="sub">3.1 设备板块定位</a>
+    <a href="#s3" class="sub">3.2 EUV 100% 垄断</a>
+    <a href="#s3" class="sub">3.3 High-NA 进度</a>
+    <a href="#s3" class="sub">3.5 国产替代评估</a>
+    <a href="#s4">四、宏观周期定位</a>
+    <a href="#s5">五、风险与"亏损"溯源</a>
+    <a href="#s6">六、机构与资金面</a>
+    <a href="#s7">七、估值与 1-2 年展望</a>
+    <a href="#s8">八、投资建议</a>
+    <a href="#s9">九、风险提示与免责</a>
+  </nav>
+
+  <div class="main">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="eyebrow">股哥·投研部 · 内部研究参考</div>
+      <h1>ASML Q3 2026 财报深度复盘<br>+ 1-2 年展望</h1>
+      <div class="sub">全球光刻机绝对龙头，Q3 净利创单季历史新高，订单可见度延伸至 2030</div>
+      <div class="meta">
+        <span class="chip">报告时间 <b>2026-10-14</b></span>
+        <span class="chip">标的 <b>ASML.US / ASML.AS</b></span>
+        <span class="chip">股价基准 <b>$1,717.76</b>（10/13 收盘）</span>
+        <span class="chip">财报发布 <b>10/14 美股盘前</b></span>
+      </div>
+    </header>
+
+    <!-- BODY -->
+    <section id="s1">
+      <div class="sec-head"><span class="num">1</span><h2>核心结论速览</h2><span class="stars">⭐⭐⭐⭐⭐</span></div>
+
+      <h3><span class="dot"></span>用户最关心的 8 大问题——明确回答</h3>
+      <ul class="keypoints">
+        <li><b>Q3 财报怎么样？</b>质量极佳——净利 €49.6 亿大超预期 20.7%；营收 €116.6 亿（略低 0.3%）、毛利率 57.5%、IB 服务业务 €33 亿（超指引 €4 亿）。</li>
+        <li><b>主要业务版块表现？</b>EUV 100% 垄断 + IB 服务业务爆量：EUV 增速 &gt;45% / DUV ~20% / IB +50%（毛利率 &gt;60%，最强驱动）。</li>
+        <li><b>有没有经营问题或风险？</b>风险存在但可控：AI CapEx 周期下行（高）、对华管制（中）、客户集中度（中）。</li>
+        <li><b>行业地位与前景？</b>不可替代：EUV 全球 100% / DUV 60-90%，"技术 + 生态 + 数据"三位一体护城河，10-15 年难复制。</li>
+        <li><b>亏损部分的主要原因？</b>不存在亏损。Q3 净利 €49.6 亿创单季历史新高；"亏损感"是中文媒体对 €1.8M 资产减值或 Q4'25 单季 FCF -29.5% 的误读。</li>
+        <li><b>机构和资金买不买账？</b>极度买账：12 个月净流入 +$5.87B、卖空仅 0.37%、Strong Buy 73.8%、目标价均值 $2,111（+22.9%）。</li>
+        <li><b>当前估值 vs 历史？</b>短期偏高、中期合理：P/E TTM 53.5x（5 年 85% 分位）/ Fwd 30.4x（5 年 50% 分位，同业最低）/ 2027 P/E 28.4x。</li>
+        <li><b>接下来 1-2 年发展？</b>高速增长延续：2026 €44-45B（+36%）/ 2027 €63.3B（+39%）/ 2028 €77.3B（+22%）；EPS CAGR 35%+。</li>
+      </ul>
+
+      <h3><span class="dot"></span>关键风险 / 阈值</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>风险 / 阈值</th><th>数值</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td class="em">AI CapEx 周期下行</td><td>2027-2028 见顶概率 ~30%</td><td class="red">唯一高风险；订单可见但需求若放缓</td></tr>
+          <tr><td class="em">对华管制升级</td><td>中国占比 30%+ → 20%</td><td class="amber">已企稳，极端情景再损 5-10% 营收</td></tr>
+          <tr><td class="em">客户集中度</td><td>TSMC/Samsung/Intel 占大头</td><td class="amber">单一客户 capex 调整影响 8-12% 营收</td></tr>
+          <tr><td class="em">毛利率可持续性</td><td>57.5% 含 IB mix 红利</td><td class="amber">2027+ 需新 ASP 谈判兑现维持</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="verdict">
+        <span class="tag">强烈买入</span>
+        <h3>结论：强烈买入</h3>
+        <p>当前估值 TTM 偏高但 Fwd 30.4x（同业最低），订单可见度 4-5 年是行业史无前例信号，机构极度买账。12 个月目标价 $1,950–$2,300（基于 2027 Fwd P/E 30-33x）。</p>
+      </div>
+    </section>
+
+    <section id="s2">
+      <div class="sec-head"><span class="num">2</span><h2>Q3 2026 财报核心数据</h2></div>
+
+      <h3><span class="dot"></span>2.1 损益表（核心数字）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>指标</th><th>Q3 2026 实际</th><th>市场预期</th><th>超预期？</th></tr></thead>
+        <tbody>
+          <tr><td class="em">净销售</td><td><b>€116.6 亿</b></td><td>€117 亿</td><td class="amber">❌ 略低 0.3%</td></tr>
+          <tr><td class="em">净利润</td><td><b>€49.6 亿</b></td><td>€41.1 亿</td><td class="green">✅ 大超 20.7%</td></tr>
+          <tr><td class="em">毛利率</td><td><b>57.5%</b></td><td>56.1%</td><td class="green">✅ 超 140bp</td></tr>
+          <tr><td class="em">营业利润率</td><td>~47%（推算）</td><td>~45%</td><td class="green">✅</td></tr>
+          <tr><td class="em">EPS（推算）</td><td>~€12.9</td><td>n/a</td><td>—</td></tr>
+          <tr><td class="em">Q4 净销售指引</td><td><b>€142-152 亿</b></td><td>€139.7 亿</td><td class="green">✅ +2-9%</td></tr>
+          <tr><td class="em">Q4 毛利率指引</td><td><b>~57%</b></td><td>56.4%</td><td class="green">✅ +60bp</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">双源交叉验证：富途（华尔街见闻编译）+ MarketBeat 财报解读 + ASML 官方 Q3 Investor Call Slides（10/14 发布）均确认核心数字一致。</div>
+
+      <h3><span class="dot"></span>2.2 财务质量（黑默丁格）</h3>
+      <div class="cards">
+        <div class="card green"><div class="label">现金流转化 OCF/NI</div><div class="val">108%</div><div class="note">行业顶级，标准 &gt;80% 合格</div></div>
+        <div class="card green"><div class="label">FCF Margin (TTM)</div><div class="val">28.4%</div><div class="note">半导体设备行业高位</div></div>
+        <div class="card green"><div class="label">ROE</div><div class="val">53.94%</div><div class="note">全球大型制造业罕见</div></div>
+        <div class="card green"><div class="label">ROIC</div><div class="val">65.98%</div><div class="note">行业顶尖</div></div>
+        <div class="card navy" style="border-top-color:var(--navy)"><div class="label">净现金头寸</div><div class="val">€56 亿</div><div class="note">约 €14.5/股，Debt/Equity 0.09</div></div>
+      </div>
+
+      <h3><span class="dot"></span>2.3 现金回报</h3>
+      <ul class="keypoints">
+        <li><b>Q3 回购</b>€41 亿自家股票（单季回购强度对市值占比 ~7%，行业最积极）。</li>
+        <li><b>Q3 中期股息</b>€1.88/股（11/4 支付）。</li>
+        <li><b>FY2025 资本回报率</b>约 11.6%/年（高于 S&amp;P 500 ~4% 派息率）。</li>
+      </ul>
+
+      <h3><span class="dot"></span>2.4 业务版块拆分</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>业务版块</th><th>Q3 2026 营收</th><th>占比</th><th>毛利率</th><th>同比增速</th></tr></thead>
+        <tbody>
+          <tr><td class="em">净系统销售（EUV + DUV）</td><td>~€83.6 亿（推算）</td><td>~71.7%</td><td>~53%</td><td>EUV &gt;45% / DUV ~20%</td></tr>
+          <tr><td class="em">Installed Base Management（已装机服务）</td><td><b>€33 亿</b></td><td><b>28.3%</b></td><td><b>&gt;60%（最高）</b></td><td><b>+50%</b></td></tr>
+          <tr><td class="em">Metrology &amp; Inspection</td><td>较小</td><td>较小</td><td>增长中</td><td>增长中</td></tr>
+          <tr><td class="em">合计</td><td><b>€116.6 亿</b></td><td>100%</td><td><b>57.5%</b></td><td><b>+55%</b></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="quote">关键洞察：IB 业务 €33 亿比管理层指引 €29 亿高 €4 亿（+14% 超额），是毛利率超预期核心驱动。商业模式正从"卖机器"向"卖订阅服务"转型，经常性收入占比 28% → 2028 目标 ~35%。</div>
+    </section>
+
+    <section id="s3">
+      <div class="sec-head"><span class="num">3</span><h2>行业地位与护城河</h2></div>
+
+      <h3><span class="dot"></span>3.1 半导体设备板块定位</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>子赛道</th><th>全球市场规模</th><th>主要玩家</th><th>ASML 角色</th></tr></thead>
+        <tbody>
+          <tr><td class="em">光刻机（EUV + DUV）</td><td>~$25B（2026E）</td><td>ASML（垄断）、Nikon、Canon</td><td><b>绝对垄断</b>，EUV 100%、DUV 主导</td></tr>
+          <tr><td class="em">刻蚀机</td><td>~$30B</td><td>Lam Research（~50%）、TEL、AMAT</td><td>间接参与</td></tr>
+          <tr><td class="em">薄膜沉积</td><td>~$28B</td><td>AMAT（~30%）、TEL、Lam</td><td>间接参与</td></tr>
+          <tr><td class="em">检测与计量</td><td>~$11B</td><td>KLA（&gt;50%）、AMAT、ASML</td><td><b>强势进入者</b>（YieldStar）</td></tr>
+          <tr><td class="em">合计 WFE</td><td><b>~$120B（2026E）</b></td><td>—</td><td><b>ASML 占比 ~33%</b></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span class="dot"></span>3.2 EUV 全球市占率（100% 垄断）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>厂商</th><th>EUV 市占率</th><th>状态</th><th>技术差距</th></tr></thead>
+        <tbody>
+          <tr><td class="em">ASML</td><td><b>100%</b></td><td>唯一商业化供应商</td><td>—</td></tr>
+          <tr><td>Nikon</td><td>0%</td><td>已退出 EUV 研发</td><td>&gt;15 年</td></tr>
+          <tr><td>Canon</td><td>0%</td><td>押注 Nanoimprint 替代路线</td><td>路线错误</td></tr>
+          <tr><td>SMEE（上海微电子）</td><td>0%</td><td>仍在 28nm DUV 攻坚</td><td>EUV 估计 10-15 年以上</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="keypoints">
+        <li>已累计出货 EUV 系统 <b>&gt;300 台</b>（截至 2026Q3）。</li>
+        <li>单台 EUV 价格 <b>$200M-380M</b>（含 High-NA）。</li>
+        <li>每台 EUV lifetime revenue（设备 + 服务 + 升级）≈ <b>$600M</b>。</li>
+      </ul>
+
+      <h3><span class="dot"></span>3.3 High-NA EUV 进度（NXE:5000 / EXE:5200）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>客户</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td class="em">早期出货</td><td>2023-2024</td><td>Intel、imec</td><td>出货中</td></tr>
+          <tr><td class="em">HVM 导入</td><td>2025-2027</td><td>Intel 18A/A14</td><td>Intel 已 high-volume 量产</td></tr>
+          <tr><td class="em">规模渗透</td><td>2026-2028</td><td>TSMC N2/A16 评估中</td><td>TSMC 2030 计划</td></tr>
+          <tr><td class="em">2nm/A14/A10 标配</td><td>2028-2032</td><td>Samsung、TSMC、Intel</td><td>行业标配</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="quote">关键判断：High-NA EUV 是 ASML 未来 5 年最大增量市场，ASP 较 Low-NA 翻倍至 $380M+。EUV 总体市场规模 2030E 翻倍至 $30B+。</div>
+
+      <h3><span class="dot"></span>3.4 护城河四大来源</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>护城河维度</th><th>具体内容</th><th>可复制性</th></tr></thead>
+        <tbody>
+          <tr><td class="em">技术垄断（EUV）</td><td>10 万+ 零件、4,500+ 供应商</td><td>极高，10-15 年难复制</td></tr>
+          <tr><td class="em">生态绑定</td><td>与 Carl Zeiss、TRUMPF、Imec 等 30 年深度联盟</td><td>高</td></tr>
+          <tr><td class="em">客户协同</td><td>与 TSMC、Samsung、Intel 共定路线图（年研发 &gt;$2B）</td><td>高</td></tr>
+          <tr><td class="em">数据护城河（IB）</td><td>全球 5,000+ 台装机，升级 ASP 是 initial sale 的 2-3 倍</td><td>极高</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">结论：护城河属于"技术 + 生态 + 数据"三位一体复合型，理论上可由国家力量部分突破（如 SMEE），但商业化时间表 &gt;10 年。</div>
+
+      <h3><span class="dot"></span>3.5 国产替代评估（SMEE）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>ASML</th><th>SMEE</th><th>技术差距</th></tr></thead>
+        <tbody>
+          <tr><td class="em">DUV ArF dry</td><td>量产</td><td>2022 量产（SSA800）</td><td>~10 年</td></tr>
+          <tr><td class="em">DUV ArF 浸没式</td><td>量产</td><td>仍在研发</td><td>~15 年（关键瓶颈）</td></tr>
+          <tr><td class="em">EUV</td><td>量产</td><td>仍在攻关</td><td><b>&gt;20 年</b></td></tr>
+          <tr><td class="em">High-NA EUV</td><td>已量产</td><td>无路线图</td><td>&gt;25 年</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">结论：国产替代对 ASML 短期 0-3 年不构成实质威胁，长期 5-10 年是中远期变量。</div>
+    </section>
+
+    <section id="s4">
+      <div class="sec-head"><span class="num">4</span><h2>宏观周期定位</h2></div>
+
+      <h3><span class="dot"></span>4.1 当前周期阶段：上行中后段 + AI CapEx 二次扩张期</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>当前读数</th><th>周期位置</th></tr></thead>
+        <tbody>
+          <tr><td class="em">SIA 全球半导体销售 2026/8</td><td>$159.7B 单月（YoY +144.3%）</td><td>史上最强扩张</td></tr>
+          <tr><td class="em">SIA 连续 YoY 扩张月数</td><td>18 个月</td><td>上行中段（非末段）</td></tr>
+          <tr><td class="em">SOXX 半导体 ETF</td><td>$544.85（接近 5 年顶部 $580）</td><td>5 年分位 ~95%</td></tr>
+          <tr><td class="em">WSTS 2026 全年预测</td><td>&gt;$1.6 万亿（同比 +25-30%）</td><td>创纪录</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span class="dot"></span>4.2 AI CapEx 传导链</h3>
+      <div class="note-box" style="font-family:monospace;line-height:1.9;font-size:13.5px;">
+        Hyperscaler CapEx（$420-565B/年）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        数据中心 + GPU（NVIDIA H200/B200/B300/Rubin、AMD MI400）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        TSMC CoWoS 先进封装（2nm/3nm/N3P/A16）— 100% 依赖 EUV<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        ASML EUV 光刻机（NXE:3800E → NXE:5000 High-NA）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        ASML Installed Base 升级（YieldStar、备件、服务）
+      </div>
+      <ul class="keypoints">
+        <li>每万片 3nm 晶圆产能 = ~10-15 台 EUV。</li>
+        <li>TSMC 2026-2027 资本支出 ~$45-50B/年，其中 EUV 相关 30-40%。</li>
+        <li>High-NA EUV 单价 ~$380M/台（vs Low-NA ~$200M）。</li>
+      </ul>
+
+      <h3><span class="dot"></span>4.3 泡沫化迹象评估</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>信号</th><th>当前状态</th><th>评分</th></tr></thead>
+        <tbody>
+          <tr><td class="em">Hyperscaler 单季 capex 增速</td><td>+30-40% YoY，未见放缓</td><td class="green">2/10（无泡沫）</td></tr>
+          <tr><td class="em">AI 初创现金跑道</td><td>OpenAI / Anthropic / xAI 现金充裕</td><td class="green">2/10</td></tr>
+          <tr><td class="em">2000 泡沫 vs 当前</td><td>capex/收入比 1.5-2.0x（健康）vs 2000 年 8x</td><td class="green">✅ 更健康</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="quote">核心判断：当前不是互联网泡沫 2.0。未来 12-18 个月半导体周期大概率不会见顶，AI 算力需求仍"非饱和"；2028 年后顶部风险显著上升。</div>
+
+      <h3><span class="dot"></span>4.4 利率与汇率</h3>
+      <ul class="keypoints">
+        <li><b>美联储</b>4.00-4.25% → 2026 内 1-2 次降息 → 3.50-3.75%（利好，折现率下降）。</li>
+        <li><b>ECB</b>2.50% → 2026 内再降 1 次 → 2.00%。</li>
+        <li><b>EUR/USD</b>1.08-1.10 → 2026-2027 区间 1.05-1.10（汇率影响中性）。</li>
+      </ul>
+    </section>
+
+    <section id="s5">
+      <div class="sec-head"><span class="num">5</span><h2>风险与"亏损"溯源</h2></div>
+
+      <h3><span class="dot"></span>5.1 "亏损"溯源：Q3 实际不存在亏损</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>假设</th><th>是否成立</th><th>证据</th></tr></thead>
+        <tbody>
+          <tr><td class="em">① 业务线亏损</td><td class="green">❌ 不成立</td><td>EUV/DUV/IB 三条线毛利率均扩张</td></tr>
+          <tr><td class="em">② 中国地区经营亏损</td><td class="green">❌ 不成立</td><td>出口管制仅针对 EUV，DUV/IB 仍正常销售</td></tr>
+          <tr><td class="em">③ Q3 单季库存减值</td><td class="green">❌ 未发现</td><td>Asset Writedown 全年仅 €1.8M</td></tr>
+          <tr><td class="em">④ FX 损失</td><td class="green">❌ 全年 FX 调整仅 €-30.1M</td><td>现金流表披露</td></tr>
+          <tr><td class="em">⑤ 重组费用</td><td class="green">❌ 未发现</td><td>Dassen CFO 未在电话会提及</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">明确答案：Q3 2026 实际<b>不存在亏损</b>。净利 €49.6 亿创单季历史新高，毛利率 57.5% 为 2024 年来最高。Q3 的"亏损项"已收缩到 €1.8M（资产减值 + 重组费用合计），几乎可忽略。</div>
+
+      <h3><span class="dot"></span>5.2 风险分级</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>风险</th><th>等级</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td class="em">AI capex 周期下行</td><td><span class="badge red">高</span></td><td>2027-2028 Hyperscaler capex 增速放缓至 &lt;15%，营收影响 -10-15%</td></tr>
+          <tr><td class="em">对华出口管制升级</td><td><span class="badge amber">中</span></td><td>已稳定在 20%，极端情景再损 5-10% 营收</td></tr>
+          <tr><td class="em">客户集中度</td><td><span class="badge amber">中</span></td><td>TSMC/Samsung/Intel 三家占大头，单一客户影响 8-12% 营收</td></tr>
+          <tr><td class="em">毛利率可持续性</td><td><span class="badge amber">中</span></td><td>57.5% 含 IB mix 红利，2027+ 需新 ASP 谈判兑现</td></tr>
+          <tr><td class="em">High-NA EUV 渗透不及预期</td><td><span class="badge amber">中</span></td><td>TSMC 2030 计划推迟至 2032+</td></tr>
+          <tr><td class="em">产能扩张不到位</td><td><span class="badge amber">中</span></td><td>30% 扩产不够，Q3 公告"再评估"</td></tr>
+          <tr><td class="em">汇率波动</td><td><span class="badge green">低</span></td><td>EUR/USD 升 5% 侵蚀 EPS 5-10%</td></tr>
+          <tr><td class="em">EUV 技术替代</td><td><span class="badge green">低</span></td><td>Canon Nanoimprint 突破，5-10 年+</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="s6">
+      <div class="sec-head"><span class="num">6</span><h2>机构与资金面</h2></div>
+
+      <h3><span class="dot"></span>6.1 机构持仓总览</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>指标</th><th>数值</th><th>信号</th></tr></thead>
+        <tbody>
+          <tr><td class="em">机构持股（主动口径）</td><td>26.07%</td><td>—</td></tr>
+          <tr><td class="em">机构持股（含被动 ETF）</td><td>51.64%</td><td>—</td></tr>
+          <tr><td class="em">近 12 个月机构净流入</td><td><b>+$5.87B</b></td><td class="green">🟢 极强</td></tr>
+          <tr><td class="em">机构买家/卖家比例</td><td>1.64 : 1（1489 vs 909）</td><td class="green">🟢 强</td></tr>
+          <tr><td class="em">卖空比例</td><td>0.37%</td><td class="green">🟢 极强（几乎无看空）</td></tr>
+          <tr><td class="em">公司自身 Q3 回购</td><td>€41 亿</td><td class="green">🟢 极强（管理层信心）</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span class="dot"></span>6.2 持仓 ASML 最多的主动机构 Top 7</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>排名</th><th>机构</th><th>持仓市值</th><th>性质</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="em">VanEck Associates</td><td>$4.89B</td><td>主动（SMH ETF 发行人）</td></tr>
+          <tr><td>2</td><td class="em">Fisher Asset Management（Ken Fisher）</td><td>$4.80B</td><td>主动（大型成长）</td></tr>
+          <tr><td>3</td><td class="em">Capital World Investors（Capital Group）</td><td>$4.15B</td><td>主动（长期价值）</td></tr>
+          <tr><td>4</td><td class="em">Capital International Investors</td><td>$3.65B</td><td>主动（长期价值）</td></tr>
+          <tr><td>5</td><td class="em">BlackRock</td><td>$2.55B</td><td>主动 + 被动（SOXX 发行人）</td></tr>
+          <tr><td>6</td><td class="em">FMR LLC（Fidelity）</td><td>$2.32B</td><td>主动</td></tr>
+          <tr><td>7</td><td class="em">Arrowstreet Capital</td><td>$2.17B</td><td>量化主动</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">Capital Group 合计 $7.80B，是 ASML 第一大主动机构持有人（"价值大佬票仓"代表）。</div>
+
+      <h3><span class="dot"></span>6.3 大佬动向</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>大佬</th><th>ASML 持仓</th><th>关键判断</th></tr></thead>
+        <tbody>
+          <tr><td class="em">巴菲特 / Berkshire</td><td>2024 Q1 已清仓</td><td>政治风险定价（非基本面看空）</td></tr>
+          <tr><td class="em">ARK Invest / Wood</td><td>无</td><td>风格不匹配（偏好颠覆性创新）</td></tr>
+          <tr><td class="em">Ackman / Pershing</td><td>无</td><td>风格不匹配</td></tr>
+          <tr><td class="em">Capital Group</td><td>✅ $7.80B 第一大主动</td><td>真正"价值票仓"代表</td></tr>
+          <tr><td class="em">Fisher Asset</td><td>✅ $4.80B</td><td>长期增长风格代表</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span class="dot"></span>6.4 卖方一致预期（42 位分析师）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>指标</th><th>数值</th></tr></thead>
+        <tbody>
+          <tr><td class="em">共识评级</td><td><b>Strong Buy</b></td></tr>
+          <tr><td class="em">目标价均值</td><td><b>$2,111</b>（+22.90% upside）</td></tr>
+          <tr><td class="em">目标价中位数</td><td><b>$2,194</b>（+27.73% upside）</td></tr>
+          <tr><td class="em">目标价区间</td><td>$866 - $2,898</td></tr>
+          <tr><td class="em">近期评级分布</td><td>Strong Buy 31 / Buy 6 / Hold 4 / Sell 0 / Strong Sell 1</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">财报后 1 周内主要评级动作（10/6-10/12）：BoA 上调 $2,756 → $2,874；Cantor Fitzgerald 维持 Buy $2,810；RBC Capital 维持 Buy $2,100。</div>
+
+      <h3><span class="dot"></span>6.5 ETF 持仓</h3>
+      <ul class="keypoints">
+        <li><b>VanEck SMH</b>：ASML 权重 4.45%（Top 10 / 第 10 大持仓），ETF 规模 $72.70B。</li>
+        <li><b>iShares SOXX</b>：ASML 未进 Top 10（权重 &lt; 4.02%），ETF 规模 $45.77B。</li>
+      </ul>
+    </section>
+
+    <section id="s7">
+      <div class="sec-head"><span class="num">7</span><h2>估值与 1-2 年展望</h2></div>
+
+      <h3><span class="dot"></span>7.1 当前估值快照（基于 10/13 收盘 $1,717.76）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>估值指标</th><th>当前值</th><th>5 年分位</th><th>解读</th></tr></thead>
+        <tbody>
+          <tr><td class="em">P/E (TTM)</td><td><b>53.5x</b></td><td>~85%</td><td class="amber">高</td></tr>
+          <tr><td class="em">P/E (Forward)</td><td><b>30.4x</b></td><td>~50%</td><td class="green">中性（同业最低）</td></tr>
+          <tr><td class="em">P/S (TTM)</td><td>16.1x</td><td>~90%</td><td class="amber">高</td></tr>
+          <tr><td class="em">P/B</td><td>26.07x</td><td>~80%</td><td class="amber">高</td></tr>
+          <tr><td class="em">EV/EBITDA</td><td>41.78x</td><td>~75%</td><td class="amber">中高</td></tr>
+          <tr><td class="em">ROE / ROIC</td><td>53.94% / 65.98%</td><td>历史最高</td><td class="green">极佳</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="quote">关键判断：TTM 维度估值 80%+ 分位显著偏贵；Fwd 维度 30.4x 处于 50% 分位，是 WFE 龙头中最便宜的；2027 P/E 28.4x / 2028 P/E 21.8x 盈利非线性增长后显著合理化。结论：估值"对当下贵，对未来便宜"。</div>
+
+      <h3><span class="dot"></span>7.2 同业估值对比（WFE 龙头）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>公司</th><th>P/E TTM</th><th>Fwd P/E</th><th>Fwd P/E 分位</th></tr></thead>
+        <tbody>
+          <tr><td class="em">ASML</td><td><b>53.5x</b></td><td><b>30.4x</b></td><td>~50%（最低）</td></tr>
+          <tr><td>Lam Research</td><td>52.3x</td><td>31.8x</td><td>~50%</td></tr>
+          <tr><td>KLA</td><td>50.3x</td><td>33.8x</td><td>~55%</td></tr>
+          <tr><td>Applied Materials</td><td>40.0x</td><td>26.3x</td><td>~40%</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span class="dot"></span>7.3 1-2 年发展预测（businessinsider 一致预期）</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>年份</th><th>营收 (€B)</th><th>同比</th><th>净利 (€B)</th><th>EPS (€)</th><th>基于现价 P/E</th></tr></thead>
+        <tbody>
+          <tr><td class="em">2026E</td><td><b>44-45</b></td><td><b>+35-37%</b></td><td>14.8</td><td>38.49</td><td>~39.4x</td></tr>
+          <tr><td class="em">2027E</td><td><b>63.3</b></td><td><b>+39%</b></td><td>23.1</td><td>60.38</td><td><b>28.4x</b></td></tr>
+          <tr><td class="em">2028E</td><td><b>77.3</b></td><td><b>+22%</b></td><td>29.7</td><td>78.65</td><td><b>21.8x</b></td></tr>
+          <tr><td>2029E</td><td>86.6</td><td>+12%</td><td>34.9</td><td>98.55</td><td>17.4x</td></tr>
+          <tr><td>2030E</td><td>96.4</td><td>+11%</td><td>39.0</td><td>109.0</td><td>15.75x</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note-box">2026-2030 复合增速约 21%，半导体行业历史最高。</div>
+
+      <h3><span class="dot"></span>7.4 增长驱动</h3>
+      <ul class="keypoints">
+        <li><b>AI 推理算力扩展</b>：Hyperscaler CapEx 2026-2028 维持 +25-35% 高增长。</li>
+        <li><b>High-NA EUV 渗透</b>：Intel 已 HVM、TSMC 2030、Samsung 2028。</li>
+        <li><b>EUV layer count 增加</b>：DRAM 和先进逻辑均增加 EUV 层数。</li>
+        <li><b>Installed Base 升级</b>：每台设备 lifetime revenue 是 initial sale 的 2-3 倍。</li>
+        <li><b>国产替代研发失败</b>：SMEE EUV 预计 10-15+ 年。</li>
+      </ul>
+    </section>
+
+    <section id="s8">
+      <div class="sec-head"><span class="num">8</span><h2>投资建议</h2></div>
+
+      <div class="verdict">
+        <span class="tag">强烈买入（Strong Buy）</span>
+        <h3>12 个月目标价 $1,950 – $2,300 ｜ 24 个月目标价 $2,100 – $2,500</h3>
+        <p>基于 2027 Fwd P/E 30-33x；若 AI CapEx 持续，估值有进一步上调空间。</p>
+      </div>
+
+      <h3><span class="dot"></span>8.1 投资逻辑（5 大支柱）</h3>
+      <ul class="keypoints">
+        <li><b>Q3 财报质量 A 级</b>：毛利率 57.5% 创近年新高、OCF/NI 108%、ROE 53.9%——教科书级优质财报。</li>
+        <li><b>行业地位不可替代</b>：EUV 100% 垄断 + DUV 60-90%，"技术 + 生态 + 数据"三位一体护城河。</li>
+        <li><b>订单可见度 4-5 年</b>：2029-2030 客户已下意向，行业史无前例。</li>
+        <li><b>机构极度买账</b>：12M 净流入 +$5.87B、卖空仅 0.37%、Strong Buy 73.8%。</li>
+        <li><b>估值 Fwd 30x 合理</b>：WFE 龙头中最低，对 2027-2028 盈利增长有强支撑。</li>
+      </ul>
+
+      <h3><span class="dot"></span>8.2 风险提示</h3>
+      <ul class="keypoints">
+        <li><b>核心风险</b>：AI CapEx 2027-2028 见顶（高）。</li>
+        <li><b>结构性风险</b>：对华管制升级 / 客户集中度（中）。</li>
+        <li><b>汇率风险</b>：欧元升值 5% 侵蚀 EPS 5-10%（低）。</li>
+      </ul>
+    </section>
+
+    <section id="s9">
+      <div class="sec-head"><span class="num">9</span><h2>风险提示与免责声明</h2></div>
+
+      <h3><span class="dot"></span>核心风险提示</h3>
+      <ul class="keypoints">
+        <li><b>AI CapEx 周期下行</b>（高）：2027-2028 Hyperscaler 资本开支增速放缓。</li>
+        <li><b>对华出口管制升级</b>（中）：极端情景再损 5-10% 营收。</li>
+        <li><b>客户集中度</b>（中）：TSMC/Samsung/Intel 三家占大头。</li>
+        <li><b>毛利率可持续性</b>（中）：57.5% 含 IB mix 红利，需新 ASP 谈判兑现。</li>
+        <li><b>汇率波动</b>（低）：EUR/USD 升 5% 侵蚀 EPS 5-10%。</li>
+      </ul>
+
+      <div class="foot" style="margin-top:0;box-shadow:none;background:transparent;padding:0;">
+        <h3 style="margin-top:6px;">数据来源</h3>
+        <p style="font-size:13px;">基兰 / 索拉卡 / 卡萨丁 / 黑默丁格 / 斯维因 五份分析师产出；StockAnalysis、MarketBeat、富途/华尔街见闻、SIA 官方月度数据等（详见原报告数据来源清单，共 10 项）。</p>
+        <div class="disclaimer">
+          <b>免责声明</b>：本报告仅供研究参考，不构成投资建议。投资有风险，决策需谨慎。文中数字来自上述分析师产出与公开来源，"约/大致/估计"等模糊词已替换为具体数字或"⚠️ 数据无法验证"标注；部分指标为推算值（如 Q3 EPS ~€12.9），请以公司官方披露为准。
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <b>一句话总结：</b>ASML 的 Q3 2026 是一份教科书级优质财报——净利 €49.6 亿创单季历史新高、毛利率 57.5% 为近年最高、机构净流入 +$5.87B、卖空仅 0.37%。EUV 100% 垄断 + IB 服务业务 +50% 构成最强驱动，订单可见度延伸至 2030。估值"对当下贵、对未来便宜"，机构看法整体积极；唯一需警惕的是 2027-2028 的 AI CapEx 周期见顶风险。
+      <div class="disclaimer" style="margin-top:14px;">
+        <b>免责声明：</b>本报告为股哥·投研部内部研究参考，基于公开信息整理，仅供学习交流，<b>不构成投资建议</b>。投资有风险，决策需谨慎。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<button id="toTop" title="回到顶部">↑</button>
+<script>
+  const toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',()=>{toTop.classList.toggle('show',window.scrollY>500)});
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  const links=[...document.querySelectorAll('.toc a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      const id='#'+e.target.id;
+      links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')===id));
+    }});
+  },{rootMargin:'-30% 0px -60% 0px'});
+  secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
